@@ -100,12 +100,17 @@ class GeminiWorkList:
             self.records = []
         else:
             self.records = records
-            for record in reversed(self.records):
-                if isinstance(record, Pipette):
+            self.check_status()
+
+    def check_status(self):
+        """Update pipetting status attribute."""
+        for record in reversed(self.records):
+            if isinstance(record, Pipette):
+                if record.type_character == "A":
                     self.pipetting_open = True
-                    if record.type_character == "A":
-                        self.pipetting_open = True
-                        break
+                else:  # dispense
+                    self.pipetting_open = False
+                break
 
     def add_record(self, record):
         """Add record.
@@ -138,8 +143,13 @@ class GeminiWorkList:
                         " beginning of the worklist or directly after a Break record."
                     )
 
-        # if isinstance(record, StartTimer) or isinstance(record, WaitForTimer):
-        # must not be used within pipetting operation
+        self.check_status()
+        if isinstance(record, StartTimer) or isinstance(record, WaitForTimer):
+            if self.pipetting_open:
+                raise ValueError(
+                    "Start Timer and Wait for Timer records must not be used between"
+                    " aspirate and dispense operations."
+                )
 
         self.records.append(record)
 
