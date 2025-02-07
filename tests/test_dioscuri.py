@@ -104,6 +104,15 @@ def test_dioscuri(tmpdir):
 
     worklist.add_record(reagent_dist)
 
+    # TIMER
+    timer = dioscuri.StartTimer(timernumber=1)
+    worklist.add_record(timer)
+
+    # WAIT
+    wait = dioscuri.WaitForTimer(timernumber=1, time=12)
+    worklist.add_record(wait)
+
+    # WRITE / READ
     gwl_string = worklist.records_to_string()
 
     assert (
@@ -113,6 +122,8 @@ def test_dioscuri(tmpdir):
         "Multiline\\ncomment\nR;SrcRackLabel;SrcRackID;SrcRackType;SrcPosStart;"
         "SrcPosEnd;DestRackLabel;DestRackID;DestRackType;DestPosStart;DestPosEnd;"
         "Volume;;1;1;0;\n"
+        "TS;1\n"
+        "TW;1;12\n"
     )
 
     target_gwl = os.path.join(str(tmpdir), "test.gwl")
