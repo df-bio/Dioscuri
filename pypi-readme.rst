@@ -3,7 +3,7 @@ Project description
 
 Dioscuri provides classes and methods for working with Gemini WorkList (gwl) files.
 
-A Gemini worklist file is a text file that contains pipetting instructions for the Tecan Freedom EVO robots. Dioscuri uses the Freedom EVOware (v2.7) software's specification of the gwl format.
+A Gemini worklist file is a text file that contains pipetting instructions for the Tecan Freedom EVO robots. Dioscuri uses the Freedom EVOware software's specification of the gwl format.
 
 
 **Install:**

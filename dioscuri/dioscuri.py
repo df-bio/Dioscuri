@@ -497,3 +497,52 @@ class ReagentDistribution:
         record_as_string = ";".join(str(param) for param in parameters)
 
         return record_as_string
+
+
+# FluentControl Application Software Manual (399935, en, V2.7) additional records
+class StartTimer:
+    """The Start Timer record (for Fluent).
+
+
+    **Parameters**
+
+    **timernumber**
+    > The timer number.
+    """
+
+    def __init__(self, timernumber):
+        self.timernumber = timernumber
+        self.type_character = "TS"
+
+    def to_string(self):
+        """Return string representation of the record."""
+        parameters = [self.type_character, self.timernumber]
+        record_as_string = ";".join(str(param) for param in parameters)
+
+        return record_as_string
+
+
+class WaitForTimer:
+    """The Wait for Timer record (for Fluent).
+
+
+    **Parameters**
+
+    **timernumber**
+    > The timer number.
+
+    **time**
+    > Wait time in seconds.
+    """
+
+    def __init__(self, timernumber, time):
+        self.timernumber = timernumber
+        self.time = time
+        self.type_character = "TS"
+
+    def to_string(self):
+        """Return string representation of the record."""
+        parameters = [self.type_character, self.timernumber, self.time]
+        record_as_string = ";".join(str(param) for param in parameters)
+
+        return record_as_string
