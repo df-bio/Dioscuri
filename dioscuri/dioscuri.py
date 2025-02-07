@@ -101,6 +101,14 @@ class GeminiWorkList:
         else:
             self.records = records
             self.check_status()
+            # see also add_record() for this:
+            for record in self.records[1:]:  # correct if it's the first record
+                if isinstance(record, SetDITIType):
+                    if not isinstance(self.records[-1], Break):
+                        raise ValueError(
+                            "The Set DiTi Type record can only be used at the very"
+                            " beginning of the worklist or directly after a Break record."
+                        )
 
     def check_status(self):
         """Update pipetting status attribute."""
@@ -136,7 +144,7 @@ class GeminiWorkList:
             raise AssertionError("Parameter `record` must be a record class.")
 
         if isinstance(record, SetDITIType):
-            if len(self.records) != 0:
+            if len(self.records) != 0:  # correct if it's the first record
                 if not isinstance(self.records[-1], Break):
                     raise ValueError(
                         "The Set DiTi Type record can only be used at the very"
