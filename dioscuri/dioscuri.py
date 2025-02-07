@@ -95,10 +95,17 @@ class GeminiWorkList:
 
     def __init__(self, name="worklist", records=None):
         self.name = name
+        self.pipetting_open = False  # keep track of status for the timer record
         if records is None:
             self.records = []
         else:
             self.records = records
+            for record in reversed(self.records):
+                if isinstance(record, Pipette):
+                    self.pipetting_open = True
+                    if record.type_character == "A":
+                        self.pipetting_open = True
+                        break
 
     def add_record(self, record):
         """Add record.
@@ -107,7 +114,7 @@ class GeminiWorkList:
         **Parameters**
 
         **record**
-        > `Pipette`
+        > A record class instance.
         """
         if not type(record) in [
             Pipette,
@@ -130,6 +137,9 @@ class GeminiWorkList:
                         "The Set DiTi Type record can only be used at the very"
                         " beginning of the worklist or directly after a Break record."
                     )
+
+        # if isinstance(record, StartTimer) or isinstance(record, WaitForTimer):
+        # must not be used within pipetting operation
 
         self.records.append(record)
 
