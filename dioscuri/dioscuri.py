@@ -66,6 +66,10 @@ def read_gwl(filepath):
             record = Comment(*entries[1:])
         elif entries[0] == "R":
             record = ReagentDistribution(*entries[1:])
+        elif entries[0] == "TS":
+            record = StartTimer(*entries[1:])
+        elif entries[0] == "TW":
+            record = WaitForTimer(*entries[1:])
         else:
             raise ValueError("Entry `%s` is not a valid record type." % entries[0])
 
@@ -114,6 +118,8 @@ class GeminiWorkList:
             SetDITIType,
             Comment,
             ReagentDistribution,
+            StartTimer,
+            WaitForTimer,
         ]:
             raise AssertionError("Parameter `record` must be a record class.")
 
@@ -538,7 +544,7 @@ class WaitForTimer:
     def __init__(self, timernumber, time):
         self.timernumber = timernumber
         self.time = time
-        self.type_character = "TS"
+        self.type_character = "TW"
 
     def to_string(self):
         """Return string representation of the record."""
