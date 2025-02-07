@@ -4,12 +4,13 @@
 
 # Dioscuri
 
-[![Build Status](https://app.travis-ci.com/Edinburgh-Genome-Foundry/Dioscuri.svg?branch=main)](https://app.travis-ci.com/Edinburgh-Genome-Foundry/Dioscuri)
+[![Build Status](https://github.com/Edinburgh-Genome-Foundry/Dioscuri/actions/workflows/build.yml/badge.svg)](https://github.com/Edinburgh-Genome-Foundry/Dioscuri/actions/workflows/build.yml)
 [![Coverage Status](https://coveralls.io/repos/github/Edinburgh-Genome-Foundry/Dioscuri/badge.svg?branch=main)](https://coveralls.io/github/Edinburgh-Genome-Foundry/Dioscuri?branch=main)
 
 Dioscuri is a Python package for working with **Gemini WorkList** (gwl) files and objects.
 
-A Gemini worklist file is a text file that contains pipetting instructions for the Tecan Freedom EVO robots. Dioscuri uses the Freedom EVOware (v2.7) software's specification of the gwl format.
+A Gemini worklist file is a text file that contains pipetting instructions for the Tecan Freedom EVO robots. Dioscuri uses the Freedom EVOware (v2.7 or equivalent v2.8) software's specification of the gwl format.
+It also supports the timer record for the Fluent robot.
 
 *Dioscuri* is a name for Castor and Pollux, the twins who were transformed into the Gemini constellation in Greek mythology.
 

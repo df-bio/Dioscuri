@@ -3,6 +3,8 @@
 The gwl file specification is based on the Freedom EVOware Software Manual,
 393172, v3.5 (2015), for the Tecan Freedom EVOware v2.7 software (note
 different versioning for manual and software).
+Specifications are the same for the newer v3.16 of the manual (393172) and
+corresponding v2.8 of the software.
 
 A gwl file is made up of records. A record consists of a single character
 indicating the operation type, and one or more 'parameters'.
