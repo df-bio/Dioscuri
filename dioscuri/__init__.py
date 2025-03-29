@@ -12,5 +12,3 @@ from .dioscuri import (
     WaitForTimer,
     read_gwl,
 )
-
-from .version import __version__

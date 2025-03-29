@@ -19,11 +19,11 @@ DiTi is short for 'Disposable Tip'.
 def read_gwl(filepath):
     """Read gwl file into a GeminiWorkList object.
 
-
-    **Parameters**
-
-    **filepath**
-    > Path to the gwl file (`str`)."""
+    Parameters
+    ----------
+    filepath : str
+        Path to the gwl file.
+    """
     worklist = GeminiWorkList()
 
     with open(filepath) as gwl_file:
@@ -83,14 +83,12 @@ class GeminiWorkList:
 
     A WorkList is a list of pipetting commands, or 'records'.
 
-
-    **Parameters**
-
-    **name**
-    > name of the worklist (`str`).
-
-    **records**
-    > `list` of records (Pipette class instances).
+    Parameters
+    ----------
+    name : str
+        Name of the worklist.
+    records : list
+        List of records (e.g. `Pipette` class instances).
     """
 
     def __init__(self, name="worklist", records=None):
@@ -123,11 +121,12 @@ class GeminiWorkList:
     def add_record(self, record):
         """Add record.
 
-
-        **Parameters**
-
-        **record**
-        > A record class instance.
+        Parameters
+        ----------
+        record : \
+            Pipette or WashTipOrReplaceDITI or Decontamination or Flush or Break \
+            or SetDITIType or Comment or ReagentDistribution or StartTimer or WaitForTimer
+            A record class instance.
         """
         if not type(record) in [
             Pipette,
@@ -180,11 +179,10 @@ class GeminiWorkList:
     def records_to_file(self, filename):
         """Print records into a gwl file.
 
-
-        **Parameters**
-
-        **filename**
-        > Path to the target gwl file (`str`).
+        Parameters
+        ----------
+        filename : str
+            Path to the target gwl file.
         """
         records_as_string = self.records_to_string()
         with open(filename, "w", encoding="utf8") as target_file:
@@ -196,44 +194,33 @@ class Pipette:
 
     Note that parameter MinDetectedVolume is not implemented.
 
-
-    **Parameters**
-
-    **operation**
-    > The type of the transfer (`str`): `A` for aspirate, or `D` for dispense.
-    > The first letter of the specified string is used.
-
-    **rack_label**
-    > Label (`str`) which is assigned to the labware. Maximum 32 characters.
-
-    **rack_id**
-    > Labware barcode (`str`). Maximum 32 characters.
-
-    **rack_type**
-    > Labware type (`str`): configuration name, for example "384 Well,
-    landscape". Maximum 32 characters.
-
-    **position**
-    > Well position in the labware (`int`). The position starts with 1 and
-    increases from rear to front and left to right. Range: 1 .. number of wells.
-
-    **tube_id**
-    > Tube barcode (`str`). Maximum 32 characters.
-
-    **volume**
-    > Pipetting volume (`int`) in µl (microliter). Range: 0 .. 7158278.
-
-    **liquid_class**
-    > Optional (`str`). Overwrites the liquid class specified in the Tecan
-    EVOware Worklist command that calls the gwl file. Maximum 32 characters.
-
-    **tip_mask**
-    > Optional (`str`). Specifies the tip you want to use. See details in the
-    program that uses the gwl output file. Range: 1 .. 128.
-
-    **forced_rack_type**
-    > Optional (`str`). The configuration name of the labware.
-    Maximum 32 characters.
+    Parameters
+    ----------
+    operation : str
+        The type of the transfer: `A` for aspirate, or `D` for dispense.
+        The first letter of the specified string is used.
+    rack_label : str
+        Label which is assigned to the labware. Maximum 32 characters.
+    rack_id : str
+        Labware barcode. Maximum 32 characters.
+    rack_type : str
+        Labware type: configuration name, for example "384 Well, landscape".
+        Maximum 32 characters.
+    position : int
+        Well position in the labware. The position starts with 1 and increases from
+        rear to front and left to right. Range: 1 .. number of wells.
+    tube_id : str
+        Tube barcode. Maximum 32 characters.
+    volume : int
+        Pipetting volume in µl (microliter). Range: 0 .. 7158278.
+    liquid_class : str, optional
+        Overwrites the liquid class specified in the Tecan EVOware Worklist command
+        that calls the gwl file. Maximum 32 characters.
+    tip_mask : str, optional
+        Specifies the tip you want to use. See details in the program that uses the
+        gwl output file. Range: 1 .. 128.
+    forced_rack_type : str, optional
+        The configuration name of the labware. Maximum 32 characters.
     """
 
     def __init__(
@@ -291,12 +278,10 @@ class Pipette:
 class WashTipOrReplaceDITI:
     """Class for WashTip or ReplaceDITI records.
 
-
-    **Parameters**
-
-    **scheme**
-    > Number (`int`) of wash scheme to use. Default `None`, which uses the
-    first wash scheme.
+    Parameters
+    ----------
+    scheme : int, optional
+        Number of wash scheme to use. Default `None`, which uses the first wash scheme.
     """
 
     def __init__(self, scheme=None):
@@ -361,11 +346,10 @@ class SetDITIType:
     The Set DiTi Type record can only be used at the very beginning of the worklist or
     directly after a Break record.
 
-
-    **Parameters**
-
-    **DiTi_Index**
-    > The index of DiTi Type (`str`). Used to switch DiTi types from within a worklist.
+    Parameters
+    ----------
+    DiTi_Index : str
+        The index of DiTi Type. Used to switch DiTi types from within a worklist.
     """
 
     def __init__(self, diti_index):
@@ -383,11 +367,10 @@ class SetDITIType:
 class Comment:
     """The Comment record (ignored by Freedom EVOware).
 
-
-    **Parameters**
-
-    **comment**
-    > The comment (`str`). Newlines (`\\n`) will be escaped with `\\`.
+    Parameters
+    ----------
+    comment : str
+        The comment. Newlines (``\\n``) will be escaped with ``\``.
     """
 
     def __init__(self, comment):
@@ -408,64 +391,43 @@ class Comment:
 class ReagentDistribution:
     """The Reagent Distribution record.
 
-
-    **Parameters**
-
-    **SrcRackLabel**
-    > Label (`str`) of source labware. Maximum 32 characters.
-
-    **SrcRackID**
-    > Source labware barcode (`str`). Maximum 32 characters.
-
-    **SrcRackType**
-    > Source labware type (`str`): configuration name. Maximum 32 characters.
-
-    **SrcPosStart**
-    > First well to be used in the source labware (`int`). Range: 1 .. number of wells.
-
-    **SrcPosEnd**
-    > Last well to be used in the source labware (`int`). Range: 1 .. number of wells.
-
-    **DestRackLabel**
-    > Label (`str`) of destination labware. Maximum 32 characters.
-
-    **DestRackID**
-    > Destination labware barcode (`str`). Maximum 32 characters.
-
-    **DestRackType**
-    > Destination labware type (`str`): configuration name. Maximum 32 characters.
-
-    **DestPosStart**
-    > First well to be used in the destination labware (`int`).
-    > Range: 1 .. number of wells.
-
-    **DestPosEnd**
-    > Last well to be used in the destination labware (`int`).
-    > Range: 1 .. number of wells.
-
-    **Volume**
-    > Dispense volume (`int`) in the destination labware in μl (microliter).
-    > Range: 0..7158278.
-
-    **LiquidClass**
-    > Optional (`str`). Overwrites the liquid class specified in the Tecan
-    EVOware Worklist command. Maximum 32 characters.
-
-    **NoOfDitiReuses**
-    > Optional (`int`). Maximum number of DiTi reuses allowed
-    > (default 1 = no DiTi reuse).
-
-    **NoOfMultiDisp**
-    > Optional (`int`). Maximum number of dispenses in a multidispense sequence
-    > (default 1 = no multi-dispense).
-
-    **Direction**
-    > Optional (`int`). Pipetting direction
-    > (0 = left to right, 1 = right to left; default = 0).
-
-    **ExcludeDestWell**
-    > Optional (`str`). List of wells in destination labware to be excluded from
-    > pipetting.
+    Parameters
+    ----------
+    SrcRackLabel : str
+        Label of source labware. Maximum 32 characters.
+    SrcRackID : str
+        Source labware barcode. Maximum 32 characters.
+    SrcRackType : str
+        Source labware type: configuration name. Maximum 32 characters.
+    SrcPosStart : int
+        First well to be used in the source labware. Range: 1 .. number of wells.
+    SrcPosEnd : int
+        Last well to be used in the source labware. Range: 1 .. number of wells.
+    DestRackLabel : str
+        Label of destination labware. Maximum 32 characters.
+    DestRackID : str
+        Destination labware barcode. Maximum 32 characters.
+    DestRackType : str
+        Destination labware type: configuration name. Maximum 32 characters.
+    DestPosStart : int
+        First well to be used in the destination labware. Range: 1 .. number of wells.
+    DestPosEnd : int
+        Last well to be used in the destination labware. Range: 1 .. number of wells.
+    Volume : int
+        Dispense volume in the destination labware in µl (microliter).
+        Range: 0..7158278.
+    LiquidClass : str, optional
+        Overwrites the liquid class specified in the Tecan EVOware Worklist command.
+        Maximum 32 characters.
+    NoOfDitiReuses : int, optional
+        Maximum number of DiTi reuses allowed (default 1 = no DiTi reuse).
+    NoOfMultiDisp : int, optional
+        Maximum number of dispenses in a multidispense sequence
+        (default 1 = no multi-dispense).
+    Direction : int, optional
+        Pipetting direction (0 = left to right, 1 = right to left; default = 0).
+    ExcludeDestWell : str, optional
+        List of wells in destination labware to be excluded from pipetting.
     """
 
     def __init__(
@@ -537,11 +499,10 @@ class ReagentDistribution:
 class StartTimer:
     """The Start Timer record (for Fluent).
 
-
-    **Parameters**
-
-    **timernumber**
-    > The timer number.
+    Parameters
+    ----------
+    timernumber : int
+        The timer number.
     """
 
     def __init__(self, timernumber):
@@ -559,14 +520,12 @@ class StartTimer:
 class WaitForTimer:
     """The Wait for Timer record (for Fluent).
 
-
-    **Parameters**
-
-    **timernumber**
-    > The timer number.
-
-    **time**
-    > Wait time in seconds.
+    Parameters
+    ----------
+    timernumber : int
+        The timer number.
+    time : int
+        Wait time in seconds.
     """
 
     def __init__(self, timernumber, time):
