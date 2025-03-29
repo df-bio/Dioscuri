@@ -1,6 +1,6 @@
 [project]
 name = "dioscuri"
-version = "0.2.0"
+version = "0.2.1"
 license = "MIT"
 authors = [{ name = "Peter Vegh" }]
 description = "Read/write Gemini WorkList (gwl) files."
