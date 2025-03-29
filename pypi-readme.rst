@@ -12,16 +12,14 @@ A Gemini worklist file is a text file that contains pipetting instructions for t
 
   pip install dioscuri
 
-**Web documentation:**
+**Web documentation:** `<https://edinburgh-genome-foundry.github.io/Dioscuri/>`_
 
-`<https://edinburgh-genome-foundry.github.io/Dioscuri/>`_
-
-**Github page:**
-
-`<https://github.com/Edinburgh-Genome-Foundry/Dioscuri>`_
+**Github page:** `<https://github.com/Edinburgh-Genome-Foundry/Dioscuri>`_
 
 
-**License:** MIT, Copyright 2020 Edinburgh Genome Foundry
+**License:** MIT
+
+Copyright 2020 Edinburgh Genome Foundry, University of Edinburgh
 
 
 More biology software
