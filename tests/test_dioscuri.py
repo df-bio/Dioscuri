@@ -132,6 +132,12 @@ def test_dioscuri(tmpdir):
     dioscuri.read_gwl(target_gwl)  # return without error
 
     with open(target_gwl, "a") as f:
+        f.write("C;comment;with;semicolons\n")
+    parsed = dioscuri.read_gwl(target_gwl)
+    assert isinstance(parsed.records[-1], dioscuri.Comment)
+    assert parsed.records[-1].comment == "comment;with;semicolons"
+
+    with open(target_gwl, "a") as f:
         f.write("XYZ;appended text")  # testing invalid records
     with pytest.raises(ValueError):
         dioscuri.read_gwl(target_gwl)

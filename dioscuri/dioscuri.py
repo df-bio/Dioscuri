@@ -63,7 +63,7 @@ def read_gwl(filepath):
         elif entries[0] == "S":
             record = SetDITIType(*entries[1:])  # first one is the record type
         elif entries[0] == "C":
-            record = Comment(*entries[1:])
+            record = Comment(";".join(entries[1:]))
         elif entries[0] == "R":
             record = ReagentDistribution(*entries[1:])
         elif entries[0] == "TS":
