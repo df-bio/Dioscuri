@@ -370,7 +370,7 @@ class Comment:
     Parameters
     ----------
     comment : str
-        The comment. Newlines (``\\n``) will be escaped with ``\``.
+        The comment. Newlines (``\\n``) will be escaped with ``\\``.
     """
 
     def __init__(self, comment):
